@@ -51,7 +51,7 @@ end
 ancient_world.registry = {}
 function ancient_world.register(name, def)
     local d = {
-        chance = 0.1,
+        chance = 0.5,
         offset = {x=0, y=0, z=0},
         limit_y = {max = 31000, min = -31000},
     }
@@ -121,9 +121,9 @@ minetest.register_on_generated(function(minp, maxp, seed)
                 local schematic_size = {}
                 local sf = io.open(def.schematic, "rb")
                 sf:read(6)
-                schematic_size.x = string.byte(sf:read(1)) * 0xFF + string.byte(sf:read(1))
-                schematic_size.y = string.byte(sf:read(1)) * 0xFF + string.byte(sf:read(1))
-                schematic_size.z = string.byte(sf:read(1)) * 0xFF + string.byte(sf:read(1))
+                schematic_size.x = string.byte(sf:read(1)) * 256 + string.byte(sf:read(1))
+                schematic_size.y = string.byte(sf:read(1)) * 256 + string.byte(sf:read(1))
+                schematic_size.z = string.byte(sf:read(1)) * 256 + string.byte(sf:read(1))
                 sf:close()
                 for k,v in pairs(r) do
                     local positions = minetest.find_nodes_in_area(vector.subtract(pos, schematic_size), vector.add(maxp, schematic_size), {k})
