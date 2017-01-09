@@ -10,7 +10,7 @@ ancient_world = {
     log = function() end,
 }
 
-if rawget(_G, kingdoms) then
+if rawget(_G, 'kingdoms') then
     ancient_world.config = kingdoms.config_table("ancient_world")
     ancient_world.log = kingdoms.log_function("ancient_world")
 end
@@ -65,7 +65,7 @@ domodfile("defaults.lua")
 domodfile("dungeon.lua")
 domodfile("structures.lua")
 
-if rawget(_G, kingdoms) then
+if rawget(_G, 'kingdoms') then
     ancient_world.log("action", "Loaded.")
     kingdoms.mod_ready("ancient_world")
 end

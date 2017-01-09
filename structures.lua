@@ -83,3 +83,30 @@ ancient_world.register("ancient_world:underground_hovel_2", {
     },
     on = {"default:stone"},
 })
+
+if rawget(_G, 'kingdoms') then
+    kingdoms.at_mod_load("magic", function()
+        ancient_world.register("ancient_world:magic_hovel_1", {
+            schematic = minetest.get_modpath("ancient_world") .. "/schematics/magic_hovel_1.mts",
+            type = "decoration",
+            limit_y = {
+                max = -1024,
+                min = -31000,
+            },
+            on = {"default:stone"},
+            random_replacements = {
+                ["ancient_world:placeholder_1"] = {"magic:nightcall", "magic:daypull"},
+            },
+        })
+    end)
+end
+
+ancient_world.register("ancient_world:lava_mine", {
+    schematic = minetest.get_modpath("ancient_world") .. "/schematics/lava_mine.mts",
+    chance = 1,
+    type = "decoration",
+    on = {"default:lava_source"},
+    replacements = {
+        ["ancient_world:placeholder_1"] = "air",
+    },
+})
