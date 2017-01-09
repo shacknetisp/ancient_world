@@ -158,3 +158,28 @@ ancient_world.register("ancient_world:hidden_bush_1", {
         ["ancient_world:placeholder_1"] = true,
     },
 })
+
+if rawget(_G, 'kingdoms') then
+    kingdoms.at_mod_load("magic", function()
+        ancient_world.register("ancient_world:underground_lab_1", {
+            schematic = minetest.get_modpath("ancient_world") .. "/schematics/underground_lab_1.mts",
+            type = "decoration",
+            limit_y = {
+                max = -512,
+                min = -31000,
+            },
+            offset = {
+                x = 0,
+                y = -16,
+                z = 0,
+            },
+            on = {"default:stone"},
+            replacements = {
+                ["ancient_world:placeholder_2"] = "air",
+            },
+            random_replacements = {
+                ["ancient_world:placeholder_1"] = true,
+            },
+        })
+    end)
+end
