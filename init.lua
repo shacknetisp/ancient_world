@@ -116,24 +116,31 @@ minetest.register_on_generated(function(minp, maxp, seed)
                 local pos = vector.add(use, def.offset)
                 minetest.place_schematic(pos, def.schematic, "random")
 
-                -- Very Hacky Solution due to minetest.place_schematic carrying the replacements parameter between calls.
-                -- This parses the schematic file manually, then replaces appropriate nodes between all possible positions.
                 local schematic_size = {}
+
+                -- Open the schematic and read the three size integers into schematic_size.
                 local sf = io.open(def.schematic, "rb")
                 sf:read(6)
                 schematic_size.x = string.byte(sf:read(1)) * 256 + string.byte(sf:read(1))
                 schematic_size.y = string.byte(sf:read(1)) * 256 + string.byte(sf:read(1))
                 schematic_size.z = string.byte(sf:read(1)) * 256 + string.byte(sf:read(1))
                 sf:close()
+
+                local mid = vector.add(pos, vector.divide(schematic_size, 2))
+
+                -- Replace appropriate nodes in the possible schematic area.
                 for k,v in pairs(r) do
-                    local positions = minetest.find_nodes_in_area(vector.subtract(pos, schematic_size), vector.add(maxp, schematic_size), {k})
+                    local positions = minetest.find_nodes_in_area(vector.subtract(mid, schematic_size), vector.add(mid, schematic_size), {k})
                     if positions then
                         for _,p in ipairs(positions) do
                             minetest.set_node(p, {name=v})
                         end
                     end
                 end
-                -- End Very Hacky Solution
+
+                if def.special then
+                    def.special(pos, mid, schematic_size)
+                end
             end
         end
     end

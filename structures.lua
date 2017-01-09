@@ -187,7 +187,7 @@ end
 ancient_world.register("ancient_world:mine_1", {
     schematic = minetest.get_modpath("ancient_world") .. "/schematics/mine_1.mts",
     type = "decoration",
-    on = {"default:dirt_with_grass"},
+    on = {"default:dirt_with_grass", "default:dirt_with_dry_grass"},
     offset = {
         x = 0,
         y = -48,
@@ -206,4 +206,58 @@ ancient_world.register("ancient_world:mine_1", {
                 {"default:stone_with_gold", "default:stone_with_copper", "default:stone_with_iron", "kingdoms:stone_with_silver"} or
                 {"default:stone_with_gold", "default:stone_with_copper", "default:stone_with_iron"}),
     },
+})
+
+ancient_world.register("ancient_world:meteor_1", {
+    schematic = minetest.get_modpath("ancient_world") .. "/schematics/meteor_1.mts",
+    type = "decoration",
+    on = {"default:dirt_with_grass", "default:dirt_with_dry_grass"},
+    offset = {
+        x = 0,
+        y = -2,
+        z = 0,
+    },
+    limit_y = {
+        max = 31000,
+        min = -32,
+    },
+    replacements = {
+        ["ancient_world:placeholder_1"] = "fire:basic_flame",
+    },
+    special = function(pos, mid, schematic_size)
+        local want = {
+            ["default:dirt_with_dry_grass"] = true,
+            ["default:dirt_with_grass"] = true,
+            ["default:stone"] = true,
+        }
+        local t = vector.add(mid, schematic_size)
+        t.y = t.y - 4
+        local positions = minetest.find_nodes_in_area(vector.subtract(mid, schematic_size), t, {"air"})
+        if positions then
+            for _,p in ipairs(positions) do
+                if math.random(1, 100) <= 10 then
+                    local hit = p
+                    local tries = 1
+                    while true do
+                        hit = vector.add(hit, {x=0, y=-1, z=0})
+                        if want[minetest.get_node(vector.add(hit, {x=0, y=-1, z=0})).name] then
+                            break
+                        end
+                        if want[minetest.get_node(vector.add(hit, {x=0, y=-1, z=0})).name] == "ignore" then
+                            hit = nil
+                            break
+                        end
+                        if tries > 16 then
+                            hit = nil
+                            break
+                        end
+                        tries = tries + 1
+                    end
+                    if hit then
+                        minetest.set_node(hit, {name="default:dirt"})
+                    end
+                end
+            end
+        end
+    end,
 })
