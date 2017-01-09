@@ -1,7 +1,6 @@
 -- Old guardtower/outpost upon desert sand.
 ancient_world.register("ancient_world:ruin_desert_sand_1:desert_sand", {
     schematic = minetest.get_modpath("ancient_world") .. "/schematics/ruin_desert_sand_1.mts",
-    chance = 0.1,
     type = "decoration",
     offset = {
         x = 0,
@@ -21,7 +20,6 @@ ancient_world.register("ancient_world:ruin_desert_sand_1:desert_sand", {
 -- Normal sand.
 ancient_world.register("ancient_world:ruin_desert_sand_1:sand", {
     schematic = minetest.get_modpath("ancient_world") .. "/schematics/ruin_desert_sand_1.mts",
-    chance = 0.1,
     type = "decoration",
     offset = {
         x = 0,
@@ -44,7 +42,6 @@ ancient_world.register("ancient_world:ruin_desert_sand_1:sand", {
 -- Silver sand.
 ancient_world.register("ancient_world:ruin_desert_sand_1:silver_sand", {
     schematic = minetest.get_modpath("ancient_world") .. "/schematics/ruin_desert_sand_1.mts",
-    chance = 0.1,
     type = "decoration",
     offset = {
         x = 0,
@@ -64,3 +61,25 @@ ancient_world.register("ancient_world:ruin_desert_sand_1:silver_sand", {
     },
 })
 
+ancient_world.register("ancient_world:underground_hovel_1", {
+    schematic = minetest.get_modpath("ancient_world") .. "/schematics/underground_hovel_1.mts",
+    type = "decoration",
+    limit_y = {
+        max = -64,
+        min = -31000,
+    },
+    on = {"default:stone"},
+    random_replacements = {
+        ["ancient_world:placeholder_1"] = true,
+    },
+})
+
+ancient_world.register("ancient_world:underground_hovel_2", {
+    schematic = minetest.get_modpath("ancient_world") .. "/schematics/underground_hovel_2.mts",
+    type = "decoration",
+    limit_y = {
+        max = -64,
+        min = -31000,
+    },
+    on = {"default:stone"},
+})

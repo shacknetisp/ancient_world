@@ -51,6 +51,7 @@ end
 ancient_world.registry = {}
 function ancient_world.register(name, def)
     local d = {
+        chance = 0.1,
         offset = {x=0, y=0, z=0},
         limit_y = {max = 31000, min = -31000},
     }
@@ -79,6 +80,11 @@ minetest.register_on_generated(function(minp, maxp, seed)
                     {x=minp.x, y=math.max(minp.y, def.limit_y.min), z=minp.z},
                     {x=maxp.x, y=math.min(maxp.y, def.limit_y.max), z=maxp.z},
                     def.on)
+            elseif def.type == "embedded" then
+                possible = minetest.find_nodes_in_area(
+                    {x=minp.x, y=math.max(minp.y, def.limit_y.min), z=minp.z},
+                    {x=maxp.x, y=math.min(maxp.y, def.limit_y.max), z=maxp.z},
+                    def.inside)
             end
             if #possible > 0 then
                 local r = table.copy(def.replacements or {})
