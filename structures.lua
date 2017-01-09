@@ -145,3 +145,12 @@ ancient_world.register("ancient_world:magic_hovel_2", {
         ["ancient_world:placeholder_1"] = true,
     },
 })
+
+ancient_world.register("ancient_world:hidden_bush_1", {
+    schematic = minetest.get_modpath("ancient_world") .. "/schematics/hidden_bush_1.mts",
+    type = "decoration",
+    on = {"default:dirt_with_grass"},
+    random_replacements = {
+        ["ancient_world:placeholder_1"] = true,
+    },
+})
