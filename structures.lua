@@ -110,3 +110,24 @@ ancient_world.register("ancient_world:lava_mine", {
         ["ancient_world:placeholder_1"] = "air",
     },
 })
+
+ancient_world.register("ancient_world:water_tower_1", {
+    schematic = minetest.get_modpath("ancient_world") .. "/schematics/water_tower_1.mts",
+    type = "decoration",
+    on = {"default:water_source"},
+    limit_y = {
+        max = 16,
+        min = -16,
+    },
+    offset = {
+        x = 0,
+        y = -23,
+        z = 0,
+    },
+    replacements = {
+        ["ancient_world:placeholder_2"] = "air",
+    },
+    random_replacements = {
+        ["ancient_world:placeholder_1"] = true,
+    },
+})
