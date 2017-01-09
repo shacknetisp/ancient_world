@@ -6,12 +6,7 @@ local function place_item(tab)
     if n and n.name ~= "air" then
         pos.y = pos.y + 1
         local name = items[math.random(1, #items)]
-        --Failsafe
-        if minetest.registered_nodes[name] then
-            core.set_node(pos, {name = name})
-        else
-            kingdoms.log("warning", "Tried to place unregistered node "..name.." in dungeon.")
-        end
+        core.set_node(pos, {name = name})
     end
 end
 
