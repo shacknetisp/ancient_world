@@ -183,3 +183,27 @@ if rawget(_G, 'kingdoms') then
         })
     end)
 end
+
+ancient_world.register("ancient_world:mine_1", {
+    schematic = minetest.get_modpath("ancient_world") .. "/schematics/mine_1.mts",
+    type = "decoration",
+    on = {"default:dirt_with_grass"},
+    offset = {
+        x = 0,
+        y = -48,
+        z = 0,
+    },
+    limit_y = {
+        max = 8,
+        min = -31000,
+    },
+    replacements = {
+        ["ancient_world:placeholder_2"] = "air",
+    },
+    random_replacements = {
+        ["ancient_world:placeholder_1"] = true,
+        ["ancient_world:placeholder_3"] = (rawget(_G, 'kingdoms') and
+                {"default:stone_with_gold", "default:stone_with_copper", "default:stone_with_iron", "kingdoms:stone_with_silver"} or
+                {"default:stone_with_gold", "default:stone_with_copper", "default:stone_with_iron"}),
+    },
+})
