@@ -131,3 +131,17 @@ ancient_world.register("ancient_world:water_tower_1", {
         ["ancient_world:placeholder_1"] = true,
     },
 })
+
+ancient_world.register("ancient_world:magic_hovel_2", {
+    schematic = minetest.get_modpath("ancient_world") .. "/schematics/magic_hovel_2.mts",
+    type = "decoration",
+    on = {"default:dirt_with_grass"},
+    offset = {
+        x = 0,
+        y = -3,
+        z = 0,
+    },
+    random_replacements = {
+        ["ancient_world:placeholder_1"] = true,
+    },
+})
