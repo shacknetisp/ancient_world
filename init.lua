@@ -97,7 +97,23 @@ minetest.register_on_generated(function(minp, maxp, seed)
                         end
                     end
                 end
-                local pos = vector.add(possible[math.random(1, #possible)], def.offset)
+                local selected = possible[math.random(1, #possible)]
+                local use = selected
+                if def.down_to then
+                    use = nil
+                    local try = selected
+                    for _=1,32 do
+                        try.y = try.y - 1
+                        if minetest.get_node(try).name == def.down_to then
+                            use = try
+                            break
+                        end
+                    end
+                end
+                if not use then
+                    break
+                end
+                local pos = vector.add(use, def.offset)
                 minetest.place_schematic(pos, def.schematic, "random")
 
                 -- Very Hacky Solution due to minetest.place_schematic carrying the replacements parameter between calls.
